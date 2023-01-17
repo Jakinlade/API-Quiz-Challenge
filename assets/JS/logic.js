@@ -76,7 +76,7 @@ function showQuestion() {
      }
 }
 
-// Submit high score
+// Submit high score along with players initials
 document.getElementById("submit").addEventListener("click", function() {
 
   var initials = document.getElementById("initials").value;
@@ -92,7 +92,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   var highscores = JSON.parse(localStorage.getItem("highscores")) || [];
   var highscoresList = document.getElementById("highscores-list");
-  
+
   for (var i = 0; i < highscores.length; i++) {
     var li = document.createElement("li");
     li.innerHTML = highscores[i].initials + " - " + highscores[i].score;
@@ -101,11 +101,6 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
-//  - Display the next question
-// 4. When all questions have been answered or the timer reaches 0:
-//  - Stop the timer
-//  - Hide the questions element and display the end screen element
-//  - Display the final score
-//  - Allow the user to enter their initials and submit their score
+
 // 5. On the highscores page, display a list of previous high scores and allow the user to clear the high scores.
 // 6. Store the high scores in local storage so that they persist even after the browser is closed.
