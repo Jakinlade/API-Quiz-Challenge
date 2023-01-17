@@ -2,6 +2,8 @@ var timeLeft = 75;
 var currentQuestionIndex = 0;
 var currentQuestion
 var timerId
+var correctSound = document.getElementById("correct-sound");
+var incorrectSound = document.getElementById("incorrect-sound");
 
 
 
@@ -61,17 +63,19 @@ function showQuestion() {
             // check if answer is correct
             if (this.innerHTML === questions[currentQuestionIndex].answer) {
               document.getElementById("feedback").classList.remove("hide");
+              correctSound.play()
               document.getElementById("feedback").innerHTML = "Correct!!";
               setTimeout(function(){ document.getElementById("feedback").classList.add("hide"); }, 1000);
             } else {
               timeLeft -= 10;
               document.getElementById("feedback").classList.remove("hide");
+              incorrectSound.play()
               document.getElementById("feedback").innerHTML = "No Dice!! The correct answer was " + currentQuestion.answer;
               setTimeout(function(){ document.getElementById("feedback").classList.add("hide"); }, 1000);
               }
             // show next question
             currentQuestionIndex++;
-            if (currentQuestionIndex === 4) {
+            if (currentQuestionIndex === 5) {
               endQuiz();
             } else {
               showQuestion();
@@ -106,7 +110,3 @@ document.addEventListener("DOMContentLoaded", function() {
     highscoresList.appendChild(li);
   }
 });
-
-
-// 5. On the highscores page, display a list of previous high scores and allow the user to clear the high scores.
-// 6. Store the high scores in local storage so that they persist even after the browser is closed.
