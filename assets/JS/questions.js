@@ -5,7 +5,7 @@ const allQuestions = [
       answer: "Courage, Wisdom & Power"
     },
     {
-      question: "What is the Delorian's special ability as a car",
+      question: "In 'Back to the future', What is the Delorian's special ability as a car",
       choices: ["X-ray vision", "Badass baking skills", "Time Travel", "Excell spreadsheet wiz"],
       answer: "Time Travel"
     },
@@ -33,7 +33,28 @@ const allQuestions = [
       question: "What is Ash Ketchum's fav poke'mon",
       choices: ["Himself", "Pikachu", "Charizard", "Mewtwo"],
       answer: "Himself"
+    },
+    {
+      question: "What is the name of the main protagonist in the game 'Final Fantasy 7'?",
+      choices: ["Cloud Strife", "Tidus", "Squall Leonhart", "Zidane Tribal"],
+      answer: "Cloud Strife"
+    },
+    {
+      question: "What is the name of Mario's brother?",
+      choices: ["Luigi", "Wario", "Peach", "Toad"],
+      answer: "Luigi"
+    },
+    {
+      question: "What did the 0 say to the 8?",
+      choices: ["Nice belt!", "Hey, you're looking a little hollow, are you okay?", "You're looking a little round, what's the matter?", "Nice number, bro!"],
+      answer: "Nice belt!"
+    },
+    {
+      question: "Why did the computer go to the doctor?",
+      choices: ["It had a virus!", "It had a broken mouse!", "It had a bad case of the pixels!", "Computers don't go to the doctor, they have IT support"],
+      answer: "It had a virus!"
     }
+
   ];
   
   // Select a random set of questions from the allQuestions array
