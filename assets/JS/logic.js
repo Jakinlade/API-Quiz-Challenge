@@ -1,7 +1,6 @@
 var timeLeft = 75;
 var currentQuestionIndex = 0;
 var currentQuestion
-var score = 0;
 var timerId
 
 
@@ -31,6 +30,8 @@ function endQuiz() {
   clearInterval(timerId);
   document.getElementById("questions").classList.add("hide");
   document.getElementById("end-screen").classList.remove("hide");
+
+// Display score
   document.getElementById("final-score").innerHTML = timeLeft;
 }
 
@@ -48,6 +49,8 @@ function showQuestion() {
 
     var choices = document.getElementById("choices");
     choices.innerHTML = "";
+
+    // 
     
     // iterate through question choices 
     for (var i = 0; i < currentQuestion.choices.length; i++) {
@@ -57,11 +60,14 @@ function showQuestion() {
           choiceButton.addEventListener("click", function() {
             // check if answer is correct
             if (this.innerHTML === questions[currentQuestionIndex].answer) {
-              score++;
+              document.getElementById("feedback").classList.remove("hide");
               document.getElementById("feedback").innerHTML = "Correct!!";
+              setTimeout(function(){ document.getElementById("feedback").classList.add("hide"); }, 1000);
             } else {
               timeLeft -= 10;
-              document.getElementById("feedback").innerHTML = "No Dice!!";
+              document.getElementById("feedback").classList.remove("hide");
+              document.getElementById("feedback").innerHTML = "No Dice!! The correct answer was " + currentQuestion.answer;
+              setTimeout(function(){ document.getElementById("feedback").classList.add("hide"); }, 1000);
               }
             // show next question
             currentQuestionIndex++;
@@ -69,6 +75,7 @@ function showQuestion() {
               endQuiz();
             } else {
               showQuestion();
+              document.getElementById("feedback")
             }
             });
           })(i);
@@ -99,7 +106,6 @@ document.addEventListener("DOMContentLoaded", function() {
     highscoresList.appendChild(li);
   }
 });
-
 
 
 // 5. On the highscores page, display a list of previous high scores and allow the user to clear the high scores.
