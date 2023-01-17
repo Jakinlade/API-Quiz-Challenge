@@ -23,13 +23,23 @@ const allQuestions = [
       question: "How do you like your eggs in the morning?",
       choices: ["boiled", "fried", "unfertilized", "poached"],
       answer: "poached"
+    },
+    {
+      question: "What is 5 x 7?",
+      choices: ["53", "35", "bacon", "pi"],
+      answer: "35"
+    },
+    {
+      question: "What is Ash Ketchum's fav poke'mon",
+      choices: ["Himself", "Pikachu", "Charizard", "Mewtwo"],
+      answer: "Himself"
     }
   ];
   
   // Select a random set of questions from the allQuestions array
   function selectRandomQuestions() {
     questions = [];
-    while (questions.length < 5) {
+    while (questions.length < 4) {
       randomIndex = Math.floor(Math.random() * allQuestions.length);
       if (!questions.includes(allQuestions[randomIndex])) {
         questions.push(allQuestions[randomIndex]);

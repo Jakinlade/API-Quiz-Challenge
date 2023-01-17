@@ -1,5 +1,6 @@
 var timeLeft = 75;
-var currentQuestion = 0;
+var currentQuestionIndex = 0;
+var currentQuestion
 var score = 0;
 var timerId
 
@@ -20,7 +21,7 @@ showQuestion();
     timerId = setInterval(function() {
       timeLeft--;
       document.getElementById("time").innerHTML = timeLeft;
-      if (timeLeft === 0) {
+      if ((timeLeft === 0) || (currentQuestionIndex === 4)) {
         endQuiz();
       }
     }, 1000);
@@ -30,7 +31,7 @@ function endQuiz() {
   clearInterval(timerId);
   document.getElementById("questions").classList.add("hide");
   document.getElementById("end-screen").classList.remove("hide");
-  document.getElementById("final-score").innerHTML = score;
+  document.getElementById("final-score").innerHTML = timeLeft;
 }
 
 
@@ -41,7 +42,7 @@ document.getElementById("questions").classList.remove("hide");
 
 //  - Display the first question and its choices
 function showQuestion() {
-    var currentQuestionIndex = 0;
+    
     var currentQuestion = questions[currentQuestionIndex];
     document.getElementById("question-title").innerHTML = currentQuestion.question;
 
@@ -52,34 +53,54 @@ function showQuestion() {
     for (var i = 0; i < currentQuestion.choices.length; i++) {
         var choiceButton = document.createElement("button");
         choiceButton.innerHTML = currentQuestion.choices[i];
-        choiceButton.addEventListener("click", function() {
-          // check if answer is correct
-          if (this.innerHTML === questions[currentQuestionIndex].answer) {
-            score++;
-            document.getElementById("feedback").innerHTML = "Correct!!";
-          } else {
-            timeLeft -= 10;
-            document.getElementById("feedback").innerHTML = "No Dice!!";
+        (function(index) {
+          choiceButton.addEventListener("click", function() {
+            // check if answer is correct
+            if (this.innerHTML === questions[currentQuestionIndex].answer) {
+              score++;
+              document.getElementById("feedback").innerHTML = "Correct!!";
+            } else {
+              timeLeft -= 10;
+              document.getElementById("feedback").innerHTML = "No Dice!!";
+              }
+            // show next question
+            currentQuestionIndex++;
+            if (currentQuestionIndex === 4) {
+              endQuiz();
+            } else {
+              showQuestion();
             }
-          // show next question
-          currentQuestionIndex++;
-          if (currentQuestionIndex === questions.length) {
-            endQuiz();
-          } else {
-            showQuestion();
-          }
-          });
+            });
+          })(i);
           choices.appendChild(choiceButton);
-    }
+     }
 }
 
+// Submit high score
+document.getElementById("submit").addEventListener("click", function() {
+
+  var initials = document.getElementById("initials").value;
+  var highscores = JSON.parse(localStorage.getItem("highscores")) || [];
+
+  highscores.push({initials: initials, score: timeLeft});
+  localStorage.setItem("highscores", JSON.stringify(highscores));
+  window.location.href = "highscores.html";
+});
+
+// Display high scores on highscores html page
+document.addEventListener("DOMContentLoaded", function() {
+
+  var highscores = JSON.parse(localStorage.getItem("highscores")) || [];
+  var highscoresList = document.getElementById("highscores-list");
+  
+  for (var i = 0; i < highscores.length; i++) {
+    var li = document.createElement("li");
+    li.innerHTML = highscores[i].initials + " - " + highscores[i].score;
+    highscoresList.appendChild(li);
+  }
+});
 
 
-// 3. When an answer choice is clicked:
-//  - Check if the answer is correct
-//  - If the answer is correct, increase the score
-//  - If the answer is incorrect, decrease the time remaining
-//  - Display feedback on whether the answer was correct or incorrect
 //  - Display the next question
 // 4. When all questions have been answered or the timer reaches 0:
 //  - Stop the timer
