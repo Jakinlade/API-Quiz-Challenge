@@ -65,17 +65,17 @@ function showQuestion() {
               document.getElementById("feedback").classList.remove("hide");
               correctSound.play()
               document.getElementById("feedback").innerHTML = "Correct!!";
-              setTimeout(function(){ document.getElementById("feedback").classList.add("hide"); }, 1000);
+              setTimeout(function(){ document.getElementById("feedback").classList.add("hide"); }, 2000);
             } else {
               timeLeft -= 10;
               document.getElementById("feedback").classList.remove("hide");
               incorrectSound.play()
               document.getElementById("feedback").innerHTML = "No Dice!! The correct answer was " + currentQuestion.answer;
-              setTimeout(function(){ document.getElementById("feedback").classList.add("hide"); }, 1000);
+              setTimeout(function(){ document.getElementById("feedback").classList.add("hide"); }, 2000);
               }
             // show next question
             currentQuestionIndex++;
-            if (currentQuestionIndex === 5) {
+            if (currentQuestionIndex === 4) {
               endQuiz();
             } else {
               showQuestion();

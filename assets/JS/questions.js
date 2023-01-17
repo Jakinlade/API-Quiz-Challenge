@@ -1,8 +1,8 @@
 const allQuestions = [
     {
       question: "What do the 3 parts of the triforce represent in 'The legend of Zelda'?",
-      choices: ["Honour, dignity & Wisdom", "Courage, Wisdom & Power", "Style, Grace & Power", "Cats, Dogs & Dolphins"],
-      answer: "Courage, Wisdom & Power"
+      choices: ["Honour, dignity & Wisdom", "Courage, Wisdom, Power", "Style, Grace & Power", "Cats, Dogs & Dolphins"],
+      answer: "Courage, Wisdom, Power"
     },
     {
       question: "In 'Back to the future', What is the Delorian's special ability as a car",
